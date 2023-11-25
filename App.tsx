@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import { Routes } from './routes/Routes';
 
-export default function App() {
+const App = () => {
+
+  const [fontsLoaded] = useFonts({
+    'BaiJamjuree-Regular': require('./assets/fonts/BaiJamjuree-Regular.ttf'),
+    'BaiJamjuree-Medium': require('./assets/fonts/BaiJamjuree-Medium.ttf'),
+    'BaiJamjuree-Bold': require('./assets/fonts/BaiJamjuree-SemiBold.ttf'),
+    'BaiJamjuree-SemiBold': require('./assets/fonts/BaiJamjuree-Bold.ttf')
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
